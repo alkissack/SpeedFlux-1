@@ -160,12 +160,11 @@ class Influx:
             'interface': data['interface']['name'],
             'internal_ip': data['interface']['internalIp'],
             'interface_mac': data['interface']['macAddr'],
-            'vpn_enabled': (
-                False if data['interface']['isVpn'] == 'false' else True),
+            'vpn_enabled': (False if data['interface']['isVpn'] == 'false' else True),
             'external_ip': data['interface']['externalIp'],
-            'server_id': data['server']['id'],
-            'server_name': data['server']['name'],
+	    'server_name': data['server']['name'],
             'server_location': data['server']['location'],
+            'server_id': data['server']['id'],
             'server_country': data['server']['country'],
             'server_host': data['server']['host'],
             'server_port': data['server']['port'],
@@ -174,6 +173,7 @@ class Influx:
             'speedtest_url': data['result']['url']
         }
 
+            
         if tags is None:
             tags = 'namespace'
         elif '*' in tags:

@@ -31,8 +31,7 @@ def speedtest():
             isp: {data_json['isp']}
             ext. IP: {data_json['interface']['externalIp']}
             server id: {data_json['server']['id']}
-            server location: ({data_json['server']['name']} @ \
-                {data_json['server']['location']})
+            server location: ({data_json['server']['name']} @ {data_json['server']['location']})
             """)
         speedflux.INFLUXDB.process_data(data_json)
     else:  # Speedtest failed.

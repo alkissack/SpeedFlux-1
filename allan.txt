@@ -1,0 +1,25 @@
+sudo docker build -t akissack/speedflux:latest .
+
+version: "3.9"
+services:
+  speedflux:
+    container_name: speedflux
+    build: .
+    environment: 
+        - NAMESPACE=DMZ-Speedflux-103
+        - INFLUX_DB_ADDRESS=192.168.99.104
+        - INFLUX_DB_PORT=8086
+        - INFLUX_DB_USER=root
+        - INFLUX_DB_PASSWORD=58,Staff0rdAve
+        - INFLUX_DB_DATABASE=speedflux
+        - INFLUX_DB_TAGS=external_ip
+        #[select tags or empty] # See https://github.com/breadlysm/speedtest-to-influxdb#tag-options for details
+        - SPEEDTEST_INTERVAL=60  # Minutes between speedtest updates. 
+        - PING_INTERVAL=300      # Seconds between ping updates
+        - PING_TARGETS=1.1.1.1, 8.8.8.8 # csv of hostnames to ping
+        - LOG_TYPE=info
+    #volumes:
+    #  - /mnt/hdd/docker-data/speedtest/:/tmp/update/
+    image: 	akissack/speedflux:latest # built manually from https://github.com/breadlysm/SpeedFlux
+    restart: unless-stopped
+        /speedflux:latest # built manually from https://github.com/breadlysm/SpeedFlux

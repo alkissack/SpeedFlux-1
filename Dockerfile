@@ -9,12 +9,13 @@ RUN apt-get update
 RUN apt-get -q -y install --no-install-recommends apt-utils gnupg1 apt-transport-https dirmngr curl
 
 # Install Speedtest
-RUN curl -s https://install.speedtest.net/app/cli/install.deb.sh --output /opt/install.deb.sh
+#RUN curl -s https://install.speedtest.net/app/cli/install.deb.sh --output /opt/install.deb.sh
+RUN curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh  --output /opt/install.deb.sh
 RUN bash /opt/install.deb.sh
 RUN apt-get update && apt-get -q -y install speedtest
 RUN rm /opt/install.deb.sh
 
-# Clean up
+# Clean up 10/17
 RUN apt-get -q -y autoremove && apt-get -q -y clean 
 RUN rm -rf /var/lib/apt/lists/*
 
@@ -22,6 +23,7 @@ RUN rm -rf /var/lib/apt/lists/*
 ADD . /app
 WORKDIR /app
 COPY requirements.txt requirements.txt
+# 15/17
 RUN pip install -r requirements.txt 
 COPY . .
 
